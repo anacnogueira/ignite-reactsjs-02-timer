@@ -6,7 +6,7 @@ export enum ActionTypes {
   MARK_CURRENT_CYCLE_AS_FINISHED = "MARK_CURRENT_CYCLE_AS_FINISHED",
 }
 
-export function AddNewCycleAction(newCycle: Cycle) {
+export function addNewCycleAction(newCycle: Cycle) {
   return {
     type: ActionTypes.ADD_NEW_CYCLE,
     payload: {
@@ -17,12 +17,12 @@ export function AddNewCycleAction(newCycle: Cycle) {
 
 export function markCurrentCycleAsFinishedAction() {
   return {
-    type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
+    type: ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED,
   };
 }
 
 export function interruptCurrentCycleAction() {
   return {
-    type: ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED,
+    type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
   };
 }

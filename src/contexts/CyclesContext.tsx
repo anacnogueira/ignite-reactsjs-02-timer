@@ -1,17 +1,17 @@
+import { differenceInSeconds } from "date-fns";
 import {
-  ReactNode,
   createContext,
+  ReactNode,
   useEffect,
   useReducer,
   useState,
 } from "react";
-import { Cycle, cyclesReducer } from "../reducers/cycles/reducer";
 import {
-  AddNewCycleAction,
+  addNewCycleAction,
   interruptCurrentCycleAction,
   markCurrentCycleAsFinishedAction,
 } from "../reducers/cycles/actions";
-import { differenceInSeconds } from "date-fns";
+import { Cycle, cyclesReducer } from "../reducers/cycles/reducer";
 
 interface CreateCycleData {
   task: string;
@@ -45,12 +45,12 @@ export function CyclesContextProvider({
       activeCycleId: null,
     },
     (initialState) => {
-      const storedStageAsJSON = localStorage.getItem(
+      const storedStateAsJSON = localStorage.getItem(
         "@ignite-timer:cycles-state-1.0.0"
       );
 
-      if (storedStageAsJSON) {
-        return JSON.parse(storedStageAsJSON);
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON);
       }
 
       return initialState;
@@ -79,7 +79,7 @@ export function CyclesContextProvider({
   }
 
   function markCurrentCycleAsFinished() {
-    dispatch(markCurrentCycleAsFinishedAction);
+    dispatch(markCurrentCycleAsFinishedAction());
   }
 
   function createNewCycle(data: CreateCycleData) {
@@ -92,13 +92,13 @@ export function CyclesContextProvider({
       startDate: new Date(),
     };
 
-    dispatch(AddNewCycleAction(newCycle));
+    dispatch(addNewCycleAction(newCycle));
 
     setAmountSecondsPassed(0);
   }
 
   function interruptCurrentCycle() {
-    dispatch(interruptCurrentCycleAction);
+    dispatch(interruptCurrentCycleAction());
   }
 
   return (
